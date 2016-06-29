@@ -11,6 +11,11 @@ public class Gerente {
 	private ArrayList<PMT>pmts;
 	private ArrayList<Transport_Packet> transports; 
 	
+	
+	/**
+	 * Essa classe respondavel por incializar as variaveis da classes Transport_packet, PAT, PMT, atraves de seus metodos set e get.
+	 */
+	
  
 	public Gerente(){
 		pats= new ArrayList();

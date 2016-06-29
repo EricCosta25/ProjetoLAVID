@@ -11,6 +11,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 //C:/Users/jefc21/Documents/video.ts
 public class Principal {
+	
+	/**
+	 * Recebe um Video o caminho de um video com extensão .ts.
+	 * chama o metodo Transport_packet da classe gerete, passando o pacote atual, que é inicializado com dados do pacote.
+	 * Verifica a presença Tabela PMT e  na sua existencia, o metodo pat é chamado da classe gerente e inicializado com dados do pacote que é passado como parâmetro. 
+	 * Vericana na Tabela PAT(classe), os PIDS, que liga com a tabela PMT(classe).
+	 * grava os metadados das tabelas PAT e PMT, em arquivos
+	 */
 
 	public static void main(String[] args) throws IOException{
 		String caminhoVideo= JOptionPane.showInputDialog("CAMINHO DO VIDEO: Neste Formato C:/Users/usuario/video.ts");
@@ -28,13 +36,11 @@ public class Principal {
 				p = gerente.pat(pacote);
 				
 			}
-			
-				for(int x=0;x<p.getProgram_map_PID().size();x++){
-					if(p.getProgram_map_PID().get(x) == (gerente.concatenaBits((pacote[1] & 255) & 31,pacote[2] & 255,5,13)& 8191)){
+			for(int x=0;x<p.getProgram_map_PID().size();x++){
+				if(p.getProgram_map_PID().get(x) == (gerente.concatenaBits((pacote[1] & 255) & 31,pacote[2] & 255,5,13)& 8191)){
 						gerente.pmt(pacote);
-					}
 				}
-			
+			}
 		}
 		gerente.gravarPAT("nomeVIDEO_PAT");
 		gerente.gravarPMT("nomeVIDEO_PMT");
